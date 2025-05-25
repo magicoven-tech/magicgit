@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clonar e Renomear - MagicGit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background: #0c0a1d;
+            min-height: 100vh;
+            color: #f0f0f0;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        header {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #2a2a4a;
+        }
+        .back-button {
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            color: #9d7cff;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            background: rgba(157, 124, 255, 0.1);
+            border: 1px solid rgba(157, 124, 255, 0.2);
+        }
+        .back-button:hover {
+            color: #fff;
+            background: rgba(157, 124, 255, 0.2);
+            border-color: #9d7cff;
+            text-decoration: none;
+        }
+        h1 {
+            color: #fff;
+            margin-top: 0.5rem;
+            font-size: 2.25rem;
+            font-weight: 600;
+            margin-bottom: 0;
+        }
+        .content {
+            background: #1a1a2e;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid #2a2a4a;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .command {
+            background: #0f0f1f;
+            padding: 1.5rem 1rem 1rem 1.5rem;
+            border-radius: 8px;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            position: relative;
+            overflow: hidden;
+            margin: 1.25rem 0;
+            border: 1px solid #2a2a4a;
+            color: #e2e8f0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: rgba(157, 124, 255, 0.2);
+            border: 1px solid rgba(157, 124, 255, 0.3);
+            color: #9d7cff;
+            padding: 0.25rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 80px;
+        }
+        .copy-btn:hover {
+            background: rgba(157, 124, 255, 0.3);
+            color: #fff;
+        }
+        .step {
+            margin-bottom: 2.5rem;
+            background: #23233a;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 3px solid #6a5acd;
+        }
+        .step h3 {
+            color: #9d7cff;
+            margin-top: 0;
+            margin-bottom: 1.25rem;
+            font-size: 1.4rem;
+            font-weight: 500;
+        }
+        .step p {
+            margin-top: 0.5rem;
+            color: #cbd5e0;
+        }
+        .note {
+            background: rgba(72, 187, 120, 0.05);
+            border-left: 3px solid #48bb78;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.95rem;
+            color: #e2e8f0;
+        }
+        .note p {
+            margin: 0;
+            color: #f6ad55;
+        }
+        .warning {
+            background: rgba(254, 178, 178, 0.05);
+            border-left: 3px solid #f56565;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.95rem;
+            color: #e2e8f0;
+        }
+        .warning p, .warning strong {
+            margin: 0;
+            color: #fc8181;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            .content {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="../index.html" class="back-button">← Voltar para a página inicial</a>
+            <h1>Clonar e Renomear Repositório</h1>
+        </header>
+
+        <div class="content">
+            <div class="step">
+                <h3>1. Clonar o repositório original</h3>
+                <p>Primeiro, clone o repositório original:</p>
+                <div class="command">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copiar</button>
+                    <code>git clone https://github.com/usuario-original/repositorio-original.git</code>
+                </div>
+                <p>Navegue até a pasta do repositório:</p>
+                <div class="command">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copiar</button>
+                    <code>cd repositorio-original</code>
+                </div>
+            </div>
+
+            <div class="step">
+                <h3>2. Remover o repositório remoto original</h3>
+                <p>Verifique o repositório remoto atual:</p>
+                <div class="command">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copiar</button>
+                    <code>git remote -v</code>
+                </div>
+                <p>Remova a origem remota:</p>
+                <div class="command">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copiar</button>
+                    <code>git remote remove origin</code>
+                </div>
+                <div class="note">
+                    <p><strong>Nota:</strong> Isso remove apenas a referência remota do seu repositório local. O repositório original no GitHub permanece inalterado.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <h3>3. Limpar o histórico do Git (opcional)</h3>
+                <p>Se você quiser começar um novo histórico limpo:</p>
+                <div class="warning">
+                    <p><strong>Atenção:</strong> Isso irá remover TODO o histórico de commits. Use apenas se tiver certeza!</p>
+                </div>
+                <div class="command">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copiar</button>
+                    <code>rm -rf .git && git init</code>
+                </div>
+                <div class="note">
+                    <p>Após executar este comando, você precisará adicionar seus arquivos novamente e fazer o commit inicial:</p>
+                    <div class="command">
+                        <button class="copy-btn" onclick="copyToClipboard(this)">Copiar</button>
+                        <code>git add . && git commit -m "Commit inicial"</code>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <h3>4. Criar um novo repositório no GitHub</h3>
+                <ol>
+                    <li>Acesse <a href="https://github.com" target="_blank" style="color: #9d7cff;">GitHub</a> e faça login</li>
+                    <li>Clique no botão "+" no canto superior direito e selecione "New repository"</li>
+                    <li>Escolha um nome para o novo repositório</li>
+                    <li>Selecione se será público ou privado</li>
+                    <li>Não inicialize o repositório com README, .gitignore ou licença</li>
+                    <li>Clique em "Create repository"</li>
+                </ol>
+            </div>
+
+            <div class="step">
+                <h3>5. Adicionar o novo repositório remoto</h3>
+                <p>Adicione o novo repositório como origem remota:</p>
+                <div class="command">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copiar</button>
+                    <code>git remote add origin https://github.com/seu-usuario/novo-repositorio.git</code>
+                </div>
+                <div class="note">
+                    <p><strong>Dica:</strong> Substitua a URL pela URL do seu novo repositório no GitHub.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <h3>6. Renomear o branch principal (opcional)</h3>
+                <p>Se desejar renomear o branch principal (por exemplo, de 'main' para 'master' ou vice-versa):</p>
+                <div class="command">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copiar</button>
+                    <code>git branch -M main</code>
+                </div>
+            </div>
+
+            <div class="step">
+                <h3>7. Enviar o código para o novo repositório</h3>
+                <p>Envie o código para o branch principal do novo repositório:</p>
+                <div class="command">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copiar</button>
+                    <code>git push -u origin main</code>
+                </div>
+                <div class="note">
+                    <p><strong>Nota:</strong> Se estiver usando um branch principal diferente de 'main', substitua 'main' pelo nome do seu branch.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <h3>8. Verificar se tudo está correto</h3>
+                <p>Verifique os repositórios remotos configurados:</p>
+                <div class="command">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copiar</button>
+                    <code>git remote -v</code>
+                </div>
+                <p>Verifique o status do seu repositório:</p>
+                <div class="command">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copiar</button>
+                    <code>git status</code>
+                </div>
+            </div>
+
+
+            <div class="warning">
+                <p><strong>Importante:</strong> Se o repositório original for público, lembre-se de que o histórico de commits ainda conterá referências ao repositório original. Para remover completamente o histórico e começar do zero, você precisará criar um novo repositório sem histórico de commits.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function copyToClipboard(button) {
+            const command = button.nextElementSibling.textContent;
+            navigator.clipboard.writeText(command).then(() => {
+                const originalText = button.textContent;
+                button.textContent = 'Copiado!';
+                button.style.background = '#48bb78';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = 'rgba(255, 255, 255, 0.1)';
+                }, 2000);
+            }).catch(err => {
+                console.error('Erro ao copiar: ', err);
+            });
+        }
+    </script>
+</body>
+</html>

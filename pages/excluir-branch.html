@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excluir Branch - MagicGit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background: #0c0a1d;
+            min-height: 100vh;
+            color: #f0f0f0;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        header {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #2a2a4a;
+        }
+        .back-button {
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            color: #9d7cff;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            background: rgba(157, 124, 255, 0.1);
+            border: 1px solid rgba(157, 124, 255, 0.2);
+        }
+        .back-button:hover {
+            color: #fff;
+            background: rgba(157, 124, 255, 0.2);
+            border-color: #9d7cff;
+            text-decoration: none;
+        }
+        h1 {
+            color: #fff;
+            margin-top: 0.5rem;
+            font-size: 2.25rem;
+            font-weight: 600;
+            margin-bottom: 0;
+        }
+        .content {
+            background: #1a1a2e;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid #2a2a4a;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .command {
+            background: #0f0f1f;
+            padding: 1.5rem 1rem 1rem 1.5rem;
+            border-radius: 8px;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            position: relative;
+            overflow: hidden;
+            margin: 1.25rem 0;
+            border: 1px solid #2a2a4a;
+            color: #e2e8f0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: rgba(157, 124, 255, 0.2);
+            border: 1px solid rgba(157, 124, 255, 0.3);
+            color: #9d7cff;
+            padding: 0.25rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 80px;
+        }
+        .copy-btn:hover {
+            background: rgba(157, 124, 255, 0.3);
+            color: #fff;
+        }
+        .step {
+            margin-bottom: 2.5rem;
+            background: #23233a;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 3px solid #6a5acd;
+        }
+        .step h3 {
+            color: #9d7cff;
+            margin-top: 0;
+            margin-bottom: 1.25rem;
+            font-size: 1.4rem;
+            font-weight: 500;
+        }
+        .step p {
+            margin-top: 0.5rem;
+            color: #cbd5e0;
+        }
+        .warning {
+            background: rgba(254, 178, 178, 0.05);
+            border-left: 3px solid #f56565;
+            padding: 1.25rem;
+            margin-bottom: 2rem;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.95rem;
+            color: #e2e8f0;
+        }
+        .warning p, .warning strong {
+            margin: 0;
+            color: #fc8181;
+        }
+        .note {
+            background: rgba(72, 187, 120, 0.05);
+            border-left: 3px solid #48bb78;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.95rem;
+            color: #e2e8f0;
+        }
+        .note p {
+            margin: 0;
+            color: #f6ad55;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            .content {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="../index.html" class="back-button">← Voltar para a página inicial</a>
+            <h1>Excluir Branches no Git</h1>
+        </header>
+
+        <div class="content">
+            <div class="warning">
+                <p><strong>Atenção:</strong> A exclusão de branches é uma operação destrutiva. Certifique-se de que não há alterações não salvas e que a branch não contém commits não mesclados que você deseja manter.</p>
+            </div>
+
+            <div class="step">
+                <h3>1. Excluir uma branch local</h3>
+                <p>Para excluir uma branch local que já foi mesclada:</p>
+                <div class="command">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copiar</button>
+                    <code>git branch -d nome-da-branch</code>
+                </div>
+                <p>Para forçar a exclusão, mesmo que a branch não tenha sido mesclada (use com cautela!):</p>
+                <div class="command">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copiar</button>
+                    <code>git branch -D nome-da-branch</code>
+                </div>
+                <div class="note">
+                    <p><strong>Dica:</strong> Você não pode excluir a branch em que está no momento. Mude para outra branch primeiro.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <h3>2. Excluir uma branch remota</h3>
+                <p>Para excluir uma branch remota:</p>
+                <div class="command">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copiar</button>
+                    <code>git push origin --delete nome-da-branch</code>
+                </div>
+                <p>Ou usando a sintaxe alternativa:</p>
+                <div class="command">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copiar</button>
+                    <code>git push origin :nome-da-branch</code>
+                </div>
+                <div class="note">
+                    <p><strong>Nota:</strong> Isso só exclui a branch remota. A branch local ainda existirá em sua máquina.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <h3>3. Limpar branches locais que não existem mais no remoto</h3>
+                <p>Para remover automaticamente as branches locais que foram excluídas no repositório remoto:</p>
+                <div class="command">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copiar</button>
+                    <code>git fetch --prune</code>
+                </div>
+                <p>Ou, para fazer isso sempre que você fizer fetch:</p>
+                <div class="command">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copiar</button>
+                    <code>git config --global fetch.prune true</code>
+                </div>
+            </div>
+
+            <div class="step">
+                <h3>4. Excluir múltiplas branches de uma vez</h3>
+                <p>Para excluir várias branches locais que já foram mescladas (exceto main, master e develop):</p>
+                <div class="command">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copiar</button>
+                    <code>git branch --merged | grep -v -E "(^\*|main|master|develop)" | xargs git branch -d</code>
+                </div>
+                <p>Para forçar a exclusão (cuidado!):</p>
+                <div class="command">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copiar</button>
+                    <code>git branch --merged | grep -v -E "(^\*|main|master|develop)" | xargs git branch -D</code>
+                </div>
+            </div>
+
+            <div class="step">
+                <h3>5. Verificar branches mescladas</h3>
+                <p>Antes de excluir, verifique quais branches já foram mescladas na branch atual:</p>
+                <div class="command">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copiar</button>
+                    <code>git branch --merged</code>
+                </div>
+                <p>Para ver branches que NÃO foram mescladas:</p>
+                <div class="command">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copiar</button>
+                    <code>git branch --no-merged</code>
+                </div>
+            </div>
+
+            <div class="step">
+                <h3>6. Recuperar uma branch excluída</h3>
+                <p>Se você excluiu uma branch por engano, ainda pode recuperá-la se lembrar do hash do último commit:</p>
+                <div class="command">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copiar</button>
+                    <code>git checkout -b nome-da-branch hash-do-commit</code>
+                </div>
+                <p>Para encontrar o hash do commit, use o reflog:</p>
+                <div class="command">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copiar</button>
+                    <code>git reflog</code>
+                </div>
+                <p>Procure pelo commit onde a branch foi excluída e use o hash do commit anterior.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function copyToClipboard(button) {
+            const command = button.nextElementSibling.textContent;
+            navigator.clipboard.writeText(command).then(() => {
+                const originalText = button.textContent;
+                button.textContent = 'Copiado!';
+                button.style.background = '#48bb78';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = 'rgba(255, 255, 255, 0.1)';
+                }, 2000);
+            }).catch(err => {
+                console.error('Erro ao copiar: ', err);
+            });
+        }
+    </script>
+</body>
+</html>

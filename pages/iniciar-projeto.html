@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Projeto - MagicGit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background: #0c0a1d;
+            min-height: 100vh;
+            color: #f0f0f0;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        header {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #2a2a4a;
+        }
+        .back-button {
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            color: #9d7cff;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            background: rgba(157, 124, 255, 0.1);
+            border: 1px solid rgba(157, 124, 255, 0.2);
+        }
+        .back-button:hover {
+            color: #fff;
+            background: rgba(157, 124, 255, 0.2);
+            border-color: #9d7cff;
+            text-decoration: none;
+        }
+        h1 {
+            color: #fff;
+            margin-top: 0.5rem;
+            font-size: 2.25rem;
+            font-weight: 600;
+            margin-bottom: 0;
+        }
+        .content {
+            background: #1a1a2e;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid #2a2a4a;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .command {
+            background: #0f0f1f;
+            padding: 1.5rem 1rem 1rem 1.5rem;
+            border-radius: 8px;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            position: relative;
+            overflow: hidden;
+            margin: 1.25rem 0;
+            border: 1px solid #2a2a4a;
+            color: #e2e8f0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: rgba(157, 124, 255, 0.2);
+            border: 1px solid rgba(157, 124, 255, 0.3);
+            color: #9d7cff;
+            padding: 0.25rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 80px;
+        }
+        .copy-btn:hover {
+            background: rgba(157, 124, 255, 0.3);
+            color: #fff;
+        }
+        .step {
+            margin-bottom: 2.5rem;
+            background: #23233a;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 3px solid #6a5acd;
+        }
+        .step h3 {
+            color: #9d7cff;
+            margin-top: 0;
+            margin-bottom: 1.25rem;
+            font-size: 1.4rem;
+            font-weight: 500;
+        }
+        .step p {
+            color: #cbd5e0;
+        }
+        .note {
+            background: rgba(254, 235, 200, 0.05);
+            border-left: 3px solid #ecc94b;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.95rem;
+            color: #e2e8f0;
+        }
+        .note p {
+            margin: 0;
+            color: #f6ad55;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            .content {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="../index.html" class="back-button">← Voltar para a página inicial</a>
+            <h1>Iniciar um Novo Projeto no Git</h1>
+        </header>
+
+        <div class="content">
+            <div class="step">
+                <h3>1. Inicializar um repositório Git local</h3>
+                <p>Navegue até a pasta do seu projeto e execute:</p>
+                <div class="command">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copiar</button>
+                    <code>git init</code>
+                </div>
+                <p>Isso cria um novo repositório Git vazio na pasta atual.</p>
+            </div>
+
+            <div class="step">
+                <h3>2. Adicionar arquivos ao staging area</h3>
+                <p>Para adicionar todos os arquivos (exceto os listados no .gitignore):</p>
+                <div class="command">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copiar</button>
+                    <code>git add .</code>
+                </div>
+                <p>Ou para adicionar arquivos específicos:</p>
+                <div class="command">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copiar</button>
+                    <code>git add nome-do-arquivo.ext</code>
+                </div>
+            </div>
+
+            <div class="step">
+                <h3>3. Fazer o primeiro commit</h3>
+                <div class="command">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copiar</button>
+                    <code>git commit -m "Primeiro commit"</code>
+                </div>
+                <p>Substitua a mensagem entre aspas por uma descrição significativa das alterações.</p>
+            </div>
+
+            <div class="step">
+                <h3>4. Criar um repositório no GitHub</h3>
+                <ol>
+                    <li>Acesse <a href="https://github.com" target="_blank" style="color: #63b3ed;">GitHub</a> e faça login</li>
+                    <li>Clique no botão "+" no canto superior direito e selecione "New repository"</li>
+                    <li>Digite um nome para o repositório</li>
+                    <li>Escolha se será público ou privado</li>
+                    <li>Não inicialize com README, .gitignore ou licença (já temos um repositório local)</li>
+                    <li>Clique em "Create repository"</li>
+                </ol>
+            </div>
+
+            <div class="step">
+                <h3>5. Conectar o repositório local ao GitHub</h3>
+                <p>Após criar o repositório no GitHub, você verá instruções. Use o comando fornecido, que será algo como:</p>
+                <div class="command">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copiar</button>
+                    <code>git remote add origin https://github.com/seu-usuario/nome-do-repositorio.git</code>
+                </div>
+                <div class="note">
+                    <p><strong>Nota:</strong> Substitua a URL pela URL do seu repositório no GitHub.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <h3>6. Enviar as alterações para o GitHub</h3>
+                <p>Para enviar seu código para o branch principal (normalmente main ou master):</p>
+                <div class="command">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copiar</button>
+                    <code>git push -u origin main</code>
+                </div>
+                <div class="note">
+                    <p><strong>Nota:</strong> Se estiver usando um branch principal chamado "master" (versões mais antigas do Git), substitua "main" por "master".</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <h3>7. Verificação final</h3>
+                <p>Atualize a página do seu repositório no GitHub. Você deve ver todos os seus arquivos lá!</p>
+                <p>Para verificar o status do seu repositório local a qualquer momento, use:</p>
+                <div class="command">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copiar</button>
+                    <code>git status</code>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function copyToClipboard(button) {
+            const command = button.nextElementSibling.textContent;
+            navigator.clipboard.writeText(command).then(() => {
+                const originalText = button.textContent;
+                button.textContent = 'Copiado!';
+                button.style.background = '#48bb78';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = 'rgba(255, 255, 255, 0.1)';
+                }, 2000);
+            }).catch(err => {
+                console.error('Erro ao copiar: ', err);
+            });
+        }
+    </script>
+</body>
+</html>

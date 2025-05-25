@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MagicGit - Comandos Úteis do Git</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background: #0c0a1d;
+            min-height: 100vh;
+            color: #fff;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+        }
+        header {
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+        }
+        .title {
+            font-size: 4rem;
+            margin: 0;
+            margin-bottom: 1rem;
+            color: #f8f8f8;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+        .subtitle {
+            font-size: 1.25rem;
+            color: #b8b8d1;
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 0 1rem;
+        }
+        .card {
+            background: #1a1a2e;
+            border-radius: 12px;
+            padding: 1.75rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #f0f0f0;
+            border: 1px solid #2a2a4a;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(138, 43, 226, 0.2);
+            border-color: #6a5acd;
+            background: #23233a;
+        }
+        .card h2 {
+            color: #9d7cff;
+            margin-top: 0;
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .card p {
+            color: #b8b8d1;
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        footer {
+            margin-top: 4rem;
+            padding: 2rem 0;
+            color: #6b6b8a;
+            font-size: 0.9rem;
+            border-top: 1px solid #2a2a4a;
+        }
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5rem;
+            }
+            .subtitle {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 id="main-title" class="title">MagicGit</h1>
+            <p class="subtitle">Comandos úteis do Git para o seu dia a dia</p>
+        </header>
+
+        <main>
+            <div class="cards">
+                <a href="pages/iniciar-projeto.html" class="card">
+                    <h2>Iniciar Projeto</h2>
+                    <p>Como criar um novo projeto local e subir para o GitHub</p>
+                </a>
+                <a href="pages/criar-branch.html" class="card">
+                    <h2>Criar Branch</h2>
+                    <p>Comandos para criação de branches</p>
+                </a>
+                <a href="pages/excluir-branch.html" class="card">
+                    <h2>Excluir Branch</h2>
+                    <p>Como remover branches locais e remotas</p>
+                </a>
+                <a href="pages/clonar-e-renomear.html" class="card">
+                    <h2>Clonar e Renomear</h2>
+                    <p>Como clonar um repositório e remover o histórico remoto</p>
+                </a>
+            </div>
+        </main>
+
+        <footer>
+            <p>© 2025 MagicGit - Todos os direitos reservados</p>
+        </footer>
+    </div>
+
+    <!-- Blotter.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Blotter/0.1.0/blotter.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/bradley/Blotter@master/effects/flies-mesh.js"></script>
+    <script>
+        // Inicializa o Blotter.js
+        document.addEventListener('DOMContentLoaded', function() {
+            const text = new Blotter.Text("MagicGit", {
+                family: "sans-serif",
+                size: 100,
+                fill: "#fff",
+                paddingLeft: 80,
+                paddingRight: 80,
+                paddingTop: 40,
+                paddingBottom: 40,
+            });
+
+            const material = new Blotter.FliesMaterial();
+            material.uniforms.uPointCellWidth.value = 0.01;
+            material.uniforms.uPointRadius.value = 0.8;
+            material.uniforms.uSpeed.value = 3;
+            material.uniforms.uDodge.value = true;
+            material.uniforms.uDodgePosition.value = [0.1, 0.1];
+            material.uniforms.uDodgeSpread.value = 0.3;
+
+            const blotter = new Blotter(material, { texts: text });
+            const scope = blotter.forText(text);
+            const elem = document.getElementById("main-title");
+            scope.appendTo(elem);
+
+            // Efeito de hover
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    material.uniforms.uDodgePosition.value = [
+                        Math.random(),
+                        Math.random()
+                    ];
+                });
+            });
+        });
+    </script>
+</body>
+</html>
